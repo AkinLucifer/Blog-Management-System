@@ -1,24 +1,13 @@
 <?php
-
-
-include 'database.php';
-include 'sign_in.php';
-
-
-if(!empty($connection)){
-    $sql = "select *from project.registration where user_type = 'user'";
-    $user_group = mysqli_query($connection, $sql);
-    $num = mysqli_num_rows($user_group);
-    if(!($num)){
-        error_reporting(0);
-        echo "Data not fetched";
-    }
-    else{
+require 'nav.php';
+    if (!empty($connection)) {
+        $sql = "select *from project.registration where user_type = 'user'";
+        $user_group = mysqli_query($connection, $sql);
+        $num = mysqli_num_rows($user_group);
         $records = mysqli_fetch_array($user_group);
-
-    }
 }
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -29,8 +18,10 @@ if(!empty($connection)){
 <body>
 <h1 class="text-center" style="color: crimson;">Welcome Back</h1>
 <p class="text-center"><?php echo$_SESSION['username']; ?></p>
-<div class="container-fluid ">
-    <table class="table table-hover table-borderless">
+<div class="container d-flex justify-content-center">
+    <?php
+    if($num) {
+    echo'<table class="table table-hover">
         <tr>
             <th>First Name</th>
             <th>Last Name</th>
@@ -40,65 +31,67 @@ if(!empty($connection)){
             <th>Username</th>
             <th>Actions</th>
         </tr>
-        <?php
-        echo'<tr>';
-        echo'<td>';
-        echo $records['fname'];
-        echo'</td>';
-        echo'<td>';
-        echo $records['lname'];
-        echo'</td>';
-        echo'<td>';
-        echo $records['dob'];
-        echo '</td>';
-        echo'<td>';
-        echo $records['gender'];
-        echo '</td>';
-        echo'<td>';
-        echo $records['contact'];
-        echo '</td>';
-        echo'<td>';
-        echo $records['username'];
-        echo '</td>';
-        echo'<td>';
-        echo '<button type="submit"  class="btn btn-info"><a href="update.php?updateid='.$records['username'].'" class="text-light text-decoration-none" style="text-decoration: none;">Update</a></button>';
-        echo '&nbsp;';
-        echo '<button type="submit"  class="btn btn-danger"><a href="delete.php?deleteid='.$records['username'].'" class="text-light text-decoration-none" style="text-decoration: none;">Delete</a></button>';
-        echo '</td>';
-        echo'</tr>';
-        while ($records = mysqli_fetch_array($user_group)){
-            echo'<tr>';
-            echo'<td>';
+        <tr>
+        <td>';
             echo $records['fname'];
-            echo'</td>';
-            echo'<td>';
+            echo '</td>
+        <td>';
             echo $records['lname'];
-            echo'</td>';
-            echo'<td>';
+            echo '</td>
+        <td>';
             echo $records['dob'];
-            echo '</td>';
-            echo'<td>';
+            echo '</td>
+        <td>';
             echo $records['gender'];
-            echo '</td>';
-            echo'<td>';
+            echo '</td>
+        <td>';
             echo $records['contact'];
-            echo '</td>';
-            echo'<td>';
+            echo '</td>
+        <td>';
             echo $records['username'];
             echo '</td>';
-            echo'<td>';
-            echo '<button type="submit"  class="btn btn-info"><a href="update.php?updateid='.$records['username'].'" class="text-light text-decoration-none" style="text-decoration: none;">Update</a></button>';
-            echo '&nbsp;';
-            echo '<button type="submit"  class="btn btn-danger"><a href="delete.php?deleteid='.$records['username'].'" class="text-light text-decoration-none" style="text-decoration: none;">Delete</a></button>';
-            echo '</td>';
-            echo'</tr>';
+            echo ' <td>
+        <button type="submit"  class="btn btn-info"><a href="update.php?updateid=' . $records['username'] . '" class="text-light text-decoration-none" style="text-decoration: none;">Update</a></button>
+        &nbsp;
+        <button type="submit"  class="btn btn-danger"><a href="delete.php?deleteid=' . $records['username'] . '" class="text-light text-decoration-none" style="text-decoration: none;">Delete</a></button>
+        </td>
+       </tr>';
+            while ($records = mysqli_fetch_array($user_group)) {
+                echo '<tr>
+             <td>';
+                echo $records['fname'];
+                echo '</td>
+             <td>';
+                echo $records['lname'];
+                echo '</td>
+            <td>';
+                echo $records['dob'];
+                echo '</td>
+            <td>';
+                echo $records['gender'];
+                echo '</td>
+            <td>';
+                echo $records['contact'];
+                echo '</td>
+            <td>';
+                echo $records['username'];
+                echo '</td>';
+                echo ' <td>
+        <button type="submit"  class="btn btn-info"><a href="update.php?updateid=' . $records['username'] . '" class="text-light text-decoration-none" style="text-decoration: none;">Update</a></button>
+        &nbsp;
+        <button type="submit"  class="btn btn-danger"><a href="delete.php?deleteid=' . $records['username'] . '" class="text-light text-decoration-none" style="text-decoration: none;">Delete</a></button>
+        </td>
+       </tr>
+       </table>';
+            }
+        }
+        else{
+            echo'<p  style="font-size: 30px; color: #6a1a21;">No Data were Found</p>';
         }
         ?>
-    </table>
-    </table>
-</div>
-<div class="d-flex justify-content-center">
-    <input type="button" value="Log out" class="btn btn-lg btn-warning text-white w-25" onclick="document.location='index.html'">
 </div>
 </body>
+<?php
+require 'footer.php';
+?>
 </html>

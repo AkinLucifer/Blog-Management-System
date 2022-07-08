@@ -8,6 +8,21 @@ error_reporting(0);
     <title>BMS</title>
 </head>
 <body>
-<?php require 'nav.php';?>
+<?php require 'nav.php';
+$user=$row['user_type'];
+?>
+<?php
+if ($user=='user'){
+echo '<div class="input-group w-50 " style="margin-left:400px;">';
+  echo'<input type="text" class="form-control text-center" placeholder="What is on your mind?" aria-label="What is on your mind?" aria-describedby="button-addon2" style="width: 50px; height:50px;">';
+    echo'<button class="btn btn-outline-secondary" type="button" id="button-addon2">Post</button>';
+echo'</div>';}
+?>
+<div class="container-fluid  w-100 m-1">
+</div>
 </body>
+<?php
+require 'footer.php';
+?>
 </html>
+
