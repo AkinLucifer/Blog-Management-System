@@ -1,19 +1,16 @@
-
 <?php
-require ("nav.php");
+include 'nav.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>BMS</title>
-    <link rel="stylesheet" href="./css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
 </head>
 <body>
-
 <?php
-require ('footer.php');
+require './footer.php';
 ?>
 </body>
 </html>
-

@@ -22,7 +22,6 @@ $_SESSION['username'] = $username;
                 echo"Login Credential is empty";
             } else {
                 if (!$row) {
-                    error_reporting(0);
                     echo 'Wrong Login Credential';
                 } else {
                     if ($pass) {
