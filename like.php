@@ -1,11 +1,18 @@
 <?php
 include 'database.php';
 include 'homepage.php';
-
+if(!empty($connection)){
 $username = $_SESSION['username'];
+/*Search for the user's details*/
+$user_search_query = "select *from project.registration where username='$username'";
+$user_search = mysqli_query($connection,$user_search_query);
+$user_records = mysqli_fetch_array($user_search);
+$user_id =$user_records['id'];
+
+
+
 
 if (isset($_GET['like_id'])) {
-    if (!empty($connection)) {
         $id = $_GET['like_id'];
         $like_check_sql = "select *from project.blog_action where actor='$username' and post_id=$id";
         $like_check_query = mysqli_query($connection, $like_check_sql);
@@ -13,7 +20,8 @@ if (isset($_GET['like_id'])) {
 
 
         if ($like_check_num != 1) {
-            $like_insert_sql = "insert into project.blog_action(post_id, actor, `like`) values($id,'$username','1')";
+            $like_insert_sql = "insert into project.blog_action(post_id, actor_id, `like`,  actor) 
+                            values($id,$user_id,'1','$username')";
             $like_insert_query = mysqli_query($connection, $like_insert_sql);
         }
         else{

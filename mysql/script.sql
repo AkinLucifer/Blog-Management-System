@@ -3,6 +3,7 @@ create schema project;
 
 /*To Create Table*/
 create table project.registration (
+    id primary key auto_increment,
     fname varchar(50) not null,
     lname varchar(50) not null,
     dob date not null,

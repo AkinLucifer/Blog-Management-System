@@ -15,7 +15,7 @@ $user = $row['user_type'];
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <Title></Title>
+    <Title>BMS</Title>
     <link rel="stylesheet" href="./css/bootstrap.min.css">
 <style>
     * {
@@ -57,19 +57,6 @@ $user = $row['user_type'];
             </ul>
             <ul class="nav nav-items">
                 <li class="nav-item"><a class="nav-link disabled"><h4 style="text-align: end"><?php echo $username; ?></h4></a></li>
-                <?php
-                if($row['user_type']=='admin'){
-                echo'<img src="./images/admin.png"  style="height: 50px; width: 70px;">';
-                }
-                else{
-                if($row['gender']=='male'){
-                echo'<img src="./images/avatar.png"  style="height: 50px; width: 50px;">';
-                }
-                else{
-                    echo'<img src="./images/female.png"  style="height: 50px; width: 50px;">';
-                }
-                }
-                ?>
             </ul>
         </nav>
 

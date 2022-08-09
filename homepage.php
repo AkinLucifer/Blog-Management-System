@@ -5,8 +5,9 @@ if(!empty($connection)and!empty($row)) {
     $search = mysqli_query($connection, $sql);
     $blog_num = mysqli_num_rows($search);
     $blog_records = mysqli_fetch_array($search);
-
     $username = $_SESSION['username'];
+
+
 }
 ?>
 <!DOCTYPE html>
@@ -15,21 +16,21 @@ if(!empty($connection)and!empty($row)) {
     <meta charset="UTF-8">
     <title>BMS</title>
     <script type="text/javascript">
-        function autoRefreshPage()
-        {
-            window.location = window.location.href;
+        function ShowHide(btncomment) {
+            var comment = document.getElementById("comment");
+            comment.style.display = btncomment.value === "Yes" ? "block" : "none";
         }
-        setInterval('autoRefreshPage()', 15000);
     </script>
 </head>
-<body >
+<body>
 <?php
 if ($user=='user'){
 echo '<form method="post" action="post.php">
-<div class="input-group w-50 " style="margin-left:300px;">
+<div class="input-group container-md form-control-sm d-flex justify-content-center" >
   <input type="text" name="content" class="form-control text-center" placeholder="What is on your mind?" aria-label="What is on your mind?" aria-describedby="button-addon2" style="width: 50px; height:50px;opacity: 0.8;" autocomplete="off">
     <input class="btn btn-outline-secondary" type="submit" name="post" value="Post" style="opacity:0.5; font-weight: bold">
 </div>
+<p class="text-center" style="font-size: 20px;"><a href="" class="text-decoration-none">Post Your Article Here</a></p>
 </form>';}
 ?>
 <div class="container-sm  w-75" style="margin-top: 20px;">
@@ -74,15 +75,22 @@ echo '<form method="post" action="post.php">
     echo '<div class="row d-flex justify-content-center">
     <div class="col">';
         if($like_search_num){
-            echo '<a class="  btn btn-lg w-100 text-primary " href="like_poke.php?like_id='.$blog_records['post_id'].'" onclick="autoRefreshPage()">Like</a>';
+            echo '<a class="  btn btn-lg w-100 text-primary " href="like_poke.php?like_id='.$blog_records['post_id'].'" onclick="location.reload();">Like</a>';
         }
         else{
-         echo '<a class="  btn btn-lg w-100  " href="like.php?like_id='.$blog_records['post_id'].'">Like</a>';
+         echo '<a class="  btn btn-lg w-100  " href="like.php?like_id='.$blog_records['post_id'].'" onclick="location.reload();">Like</a>';
         }
         echo '</div>
     <div class=col>
-    <a href="" class=" btn btn-lg w-100 ">Comment</a>
+    <input type="button" class=" btn btn-lg w-100 " onclick="ShowHide(this)" value="Comment"></input>
+    <div id="comment" style="display:none">
+    <label for="">Comment</label>
+    <input type="text">
     </div>
+    </div>
+    <div class="col">
+    <a href="report.php?report_id='.$blog_records['post_id'].'" class="btn btn-lg w-100 text-danger">Report</a>
+</div>
         </div>';
 
         while ($blog_records = mysqli_fetch_array($search)){
@@ -122,15 +130,18 @@ echo '<form method="post" action="post.php">
             echo '<div class="row d-flex justify-content-center">
     <div class="col">';
             if($like_search_num){
-                echo '<a class="  btn btn-lg w-100 text-primary " href="like_poke.php?like_id='.$blog_records['post_id'].'">Like</a>';
+                echo '<a class="  btn btn-lg w-100 text-primary " href="like_poke.php?like_id='.$blog_records['post_id'].'" onclick="location.reload();">Like</a>';
             }
             else{
-                echo '<a class="  btn btn-lg w-100  " href="like.php?like_id='.$blog_records['post_id'].'">Like</a>';
+                echo '<a class="  btn btn-lg w-100  " href="like.php?like_id='.$blog_records['post_id'].'" onclick="location.reload();">Like</a>';
             }
             echo '</div>
     <div class=col>
-    <a href="" class=" btn btn-lg w-100 ">Comment</a>
+    <a href="" class=" btn btn-lg w-100 " onclick="ShowHide(this)">Comment</a>
     </div>
+    <div class="col">
+    <a href="report.php?report_id='.$blog_records['post_id'].'" class="btn btn-lg w-100 text-danger">Report</a>
+</div>
         </div>';
 
         }

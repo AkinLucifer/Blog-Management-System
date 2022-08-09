@@ -5,11 +5,21 @@
     <title>BMS</title>
     <link rel="stylesheet" href="./css/bootstrap.min.css">
     <script src="./js/bootstrap.min.js"></script>
+    <script>
+        function validate(form){
+            let password = form.password.value;
+            let confirm_password = form.confirm_password.value;
+            if(password!==confirm_password){
+                alert("\n Password did not match: Please try again....");
+                return false;
+            }
+        }
+    </script>
 </head>
 <body style="background: #331c1c;">
 <div class="container-fluid shadow-lg p-3  bg-body rounded" style="margin-top: 40px; width: 900px;">
     <h1 class="text-center" style="color: #331c1c; font-family: Bahnschrift; font-weight:bolder; font-size: 30px;">Sign Up </h1>
-    <form action="sign_up.php" method="post">
+    <form action="sign_up.php" method="post" onsubmit="return validate(this)">
         <div class="row">
             <div class="col">
                 <label for="fname"> First Name</label>
@@ -63,7 +73,7 @@
         <hr class="border-primary mt-5" >
         <p class="text-center text-success">Already Have an Account</p>
         <div class="d-flex justify-content-center">
-            <input type="button" value="Sign In" name="forgot" style="margin-top: 10px; border-radius: 2em;" class="btn btn-outline-primary btn-lg w-75 " onclick="document.location='sign_in.html'">
+            <input type="button" value="Sign In" name="forgot" style="margin-top: 10px; border-radius: 2em;" class="btn btn-outline-primary btn-lg w-75 " onclick="document.location='index.html'">
         </div>
     </form>
 </div>
