@@ -9,8 +9,6 @@ include 'nav.php';
     <link rel="stylesheet" href="css/bootstrap.min.css">
 </head>
 <body>
-<?php
-require './footer.php';
-?>
+
 </body>
 </html>

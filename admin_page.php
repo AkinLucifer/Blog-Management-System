@@ -18,7 +18,7 @@ require 'nav.php';
 </head>
 <body>
 <h1 class="text-center" style="color: crimson;">Welcome Back</h1>
-<p class="text-center"><?php echo$_SESSION['username']; ?></p>
+<p class="text-center"><?php echo$_SESSION['UserName']; ?></p>
 <div class="container d-flex justify-content-center">
     <?php
     if($num) {
@@ -91,8 +91,6 @@ require 'nav.php';
         }
         ?>
 </div>
-<?php
-require 'footer.php';
-?>
+
 </body>
 </html>

@@ -23,7 +23,7 @@ if(isset($_GET['infoid'])){
     <title>BMS</title>
     <link rel="stylesheet" href="./css/bootstrap.min.css">
 </head>
-<body style="background-color: #d3cbcb">
+<body >
             <h2 class="text-center"><?php echo$id?>'s created Blog</h2>
     <div class="container-sm w-50">
             <?php
@@ -35,8 +35,6 @@ if(isset($_GET['infoid'])){
             }
             ?>
     </div>
-<?php
-require 'footer.php';
-?>
+
 </body>
 </html>

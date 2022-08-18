@@ -19,7 +19,11 @@ if(!empty($connection)) {
             $full_name = $first_name . " " . $last_name;
             $user_type = $check_data['user_type'];
             $user_id = $check_data['id'];
-
+            $first_name_array = str_split($first_name);
+            $last_name_array = str_split($last_name);
+            $first_letter = $first_name_array[0];
+            $last_letter = $last_name_array[0];
+            $name_letter = $first_letter.$last_letter;
 
             /*Verification of password*/
             if($password==$pass_hash){
@@ -34,13 +38,14 @@ if(!empty($connection)) {
                 echo "<p class='text-center text-danger'>Password Doesn't Match.</p>";
                 include 'index.html';
             }
+            $_SESSION['FullName']= $full_name;
+            $_SESSION['UserName'] = $username;
+            $_SESSION['Name']=$name_letter;
         }
         else {
             echo '<p class="text-center text-danger">User not registered. Please go through sign up page or check the login .</p>';
             include 'index.html';
         }
-        $_SESSION['FullName']= $full_name;
-        $_SESSION['username'] = $username;
 
     }
 }

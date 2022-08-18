@@ -16,7 +16,7 @@
         }
     </script>
 </head>
-<body style="background: #331c1c;">
+<body style="background: #0a53be;">
 <div class="container-fluid shadow-lg p-3  bg-body rounded" style="margin-top: 40px; width: 900px;">
     <h1 class="text-center" style="color: #331c1c; font-family: Bahnschrift; font-weight:bolder; font-size: 30px;">Sign Up </h1>
     <form action="sign_up.php" method="post" onsubmit="return validate(this)">
@@ -42,8 +42,8 @@
         </div>
         <label for="gender">Gender</label>
             <select class="form-select form-select-sm" aria-label=".form-select-sm example" name="gender" autocomplete="off">
-                <option value="male">Male</option>
-                <option value="female">Female</option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
             </select>
 
         <div class="row">
@@ -71,10 +71,8 @@
             <input type="submit" value="Sign Up" name="submit" id="button" class="btn btn-outline-success btn-lg w-75" style="border-radius:2em; font-family: 'Segoe UI'; font-size: 20px;">
         </div>
         <hr class="border-primary mt-5" >
-        <p class="text-center text-success">Already Have an Account</p>
-        <div class="d-flex justify-content-center">
-            <input type="button" value="Sign In" name="forgot" style="margin-top: 10px; border-radius: 2em;" class="btn btn-outline-primary btn-lg w-75 " onclick="document.location='index.html'">
-        </div>
+        <a href="index.html" class="text-decoration-none"><p class="text-center text-primary">Already Have an Account</p></a>
+        <a href="forgot_password.html" class="text-decoration-none"><p class="text-center text-danger">Forgot Password?</p></a>
     </form>
 </div>
 </body>

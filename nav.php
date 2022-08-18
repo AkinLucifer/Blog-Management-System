@@ -1,10 +1,11 @@
 <?php
 include 'database.php';
 include 'sign_in.php';
-$username = $_SESSION['FullName'];
-$name = $_SESSION['username'];
+$name = $_SESSION['FullName'];
+$username = $_SESSION['UserName'];
+$letter =$_SESSION['Name'];
 if(!empty($connection)){
-$sql = "select *from project.registration where username='$name'";
+$sql = "select *from project.registration where username='$username'";
 $check = mysqli_query($connection,$sql);
 $row = mysqli_fetch_array($check);
 $user = $row['user_type'];
@@ -31,7 +32,7 @@ $user = $row['user_type'];
         <nav class="navbar">
             <ul class="nav nav-pills nav-fill" style="margin-left: 10px;">
                 <li class="nav-item nav-justified">
-                    <a class="nav-link active text-black" aria-current="page">BMS</a>
+                    <a class="nav-link active text-white" aria-current="page">BMS</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="homepage.php">Home</a>
@@ -47,16 +48,29 @@ $user = $row['user_type'];
                     <?php
                     if($user=='admin')
                     {
-                        echo '<a href="admin_page.php" class="nav-link">Administrator</a>';
+                        echo '
+                            <li class="nav-item">
+                            <a href="admin_page.php" class="nav-link">Administrator</a>
+                            </li>
+                            <li class="nav-item">
+                            <a href="reported_page.php" class="nav-link">Reports</a>
+                            </li>';
                     }
                     else{
                         echo '<a href="blogs.php" class="nav-link">Blogs</a>';
                     }
                     ?>
                 </li>
+                <li class="nav-item">
+                    <a href="log_out.php" class="nav-link">Log Out</a>
+                </li>
             </ul>
             <ul class="nav nav-items">
-                <li class="nav-item"><a class="nav-link disabled"><h4 style="text-align: end"><?php echo $username; ?></h4></a></li>
+                <li class="nav-item">
+                    <a class="nav-link disabled"><h4 style="text-align: end;" >
+
+                            <?php echo $letter; ?></h4></a></li>
+
             </ul>
         </nav>
 

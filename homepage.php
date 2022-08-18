@@ -1,11 +1,11 @@
 <?php include 'nav.php';
 if(!empty($connection)and!empty($row)) {
     $user = $row['user_type'];
-    $sql = "select *from project.blog";
+    $sql = "select *from project.blog order by post_id DESC ";
     $search = mysqli_query($connection, $sql);
     $blog_num = mysqli_num_rows($search);
     $blog_records = mysqli_fetch_array($search);
-    $username = $_SESSION['username'];
+    $username = $_SESSION['UserName'];
 
 
 }
@@ -16,13 +16,22 @@ if(!empty($connection)and!empty($row)) {
     <meta charset="UTF-8">
     <title>BMS</title>
     <script type="text/javascript">
-        function ShowHide(btncomment) {
-            var comment = document.getElementById("comment");
-            comment.style.display = btncomment.value === "Yes" ? "block" : "none";
-        }
+        let comment = document.querySelector(".comment");
+        let isShow = true;
+       function showHideComment() {
+           if(isShow) {
+               comment.style.display = "none";
+               isShow = false;
+           }
+           else{
+               comment.style.display = "block";
+               isShow = true;
+           }
+       }
+
     </script>
 </head>
-<body>
+<body >
 <?php
 if ($user=='user'){
 echo '<form method="post" action="post.php">
@@ -40,8 +49,10 @@ echo '<form method="post" action="post.php">
     }
     else{
     echo'<div>';
-    echo'<span style="font-weight: bold;font-size: 14px;font-family: Segoe UI Historic">';
+    echo'<span style="font-weight: bold;font-size: 14px;font-family: Segoe UI Historic;">';
+    echo '<a href="user_profile.php?user_profile_id='.$username.'" style="text-decoration:none;">';
     echo $blog_records["creator"];
+    echo'</a>';
     echo'</span>
     &nbsp;&nbsp;';
     echo'<span style="font-size: 14px;font-family: Segoe UI Historic ;margin-top:5px;">';
@@ -72,31 +83,28 @@ echo '<form method="post" action="post.php">
         echo $blog_records['like'];
 
     echo '<hr>';
-    echo '<div class="row d-flex justify-content-center">
-    <div class="col">';
+    echo '<div>';
         if($like_search_num){
-            echo '<a class="  btn btn-lg w-100 text-primary " href="like_poke.php?like_id='.$blog_records['post_id'].'" onclick="location.reload();">Like</a>';
+            echo '<a class="  btn  text-primary " href="like_poke.php?like_id='.$blog_records['post_id'].'" ">Like</a>';
         }
         else{
-         echo '<a class="  btn btn-lg w-100  " href="like.php?like_id='.$blog_records['post_id'].'" onclick="location.reload();">Like</a>';
+         echo '<a class="  btn " href="like.php?like_id='.$blog_records['post_id'].'" ">Like</a>';
         }
-        echo '</div>
-    <div class=col>
-    <input type="button" class=" btn btn-lg w-100 " onclick="ShowHide(this)" value="Comment"></input>
-    <div id="comment" style="display:none">
-    <label for="">Comment</label>
-    <input type="text">
-    </div>
-    </div>
-    <div class="col">
-    <a href="report.php?report_id='.$blog_records['post_id'].'" class="btn btn-lg w-100 text-danger">Report</a>
-</div>
-        </div>';
+        echo '
+   
+    <a href="comment.php?comment_id='.$blog_records['post_id'].'" class=" btn">Comment</a>
+    ';
+    if($user=='user'){
+    echo'<a href="report.php?report_id='.$blog_records['post_id'].'" class="btn text-danger">Report</a>
+';}
+        echo'</div>';
 
         while ($blog_records = mysqli_fetch_array($search)){
             echo'<div>';
             echo'<span style="font-weight: bold;font-size: 14px;font-family: Segoe UI Historic">';
+            echo '<a href="user_profile.php?user_profile_id='.$username.'" style="text-decoration:none;">';
             echo $blog_records["creator"];
+            echo'</a>';
             echo'</span>
     &nbsp;&nbsp;';
             echo'<span style="font-size: 14px;font-family: Segoe UI Historic ;margin-top:5px;">';
@@ -127,24 +135,25 @@ echo '<form method="post" action="post.php">
             echo $blog_records['like'];
 
             echo '<hr>';
-            echo '<div class="row d-flex justify-content-center">
-    <div class="col">';
+            echo '<div>';
             if($like_search_num){
-                echo '<a class="  btn btn-lg w-100 text-primary " href="like_poke.php?like_id='.$blog_records['post_id'].'" onclick="location.reload();">Like</a>';
+                echo '<a class="  btn text-primary " href="like_poke.php?like_id='.$blog_records['post_id'].'" ">Like</a>';
             }
             else{
-                echo '<a class="  btn btn-lg w-100  " href="like.php?like_id='.$blog_records['post_id'].'" onclick="location.reload();">Like</a>';
+                echo '<a class="  btn  " href="like.php?like_id='.$blog_records['post_id'].'" ">Like</a>';
             }
-            echo '</div>
-    <div class=col>
-    <a href="" class=" btn btn-lg w-100 " onclick="ShowHide(this)">Comment</a>
-    </div>
-    <div class="col">
-    <a href="report.php?report_id='.$blog_records['post_id'].'" class="btn btn-lg w-100 text-danger">Report</a>
-</div>
-        </div>';
+            echo '
+   
+    <a href="comment.php?comment_id='.$blog_records['post_id'].'" class=" btn ">Comment</a>
+    ';
+    if($user=='user'){
+    echo'
+    <a href="report.php?report_id='.$blog_records['post_id'].'" class="btn text-danger">Report</a>
+';}
+        echo'</div>';
 
         }
+
     }
     ?>
 </div>

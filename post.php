@@ -17,6 +17,8 @@ if(!empty($connection)) {
 
         $sql = "Insert into project.blog( id, post, date, month, creator) Values ('$user_id','$post','$blog_date','$blog_month','$username')";
         $blog_post = mysqli_query($connection, $sql);
-        header('Location:homepage.php');
+        if($blog_post=='true') {
+            header('Location:homepage.php');
+        }
     }
 }
