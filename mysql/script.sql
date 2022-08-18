@@ -60,11 +60,13 @@ create table project.comment
     comment    varchar(255) not null,
     post_id    int          not null,
     actor_id   int          not null,
-    constraint comment_blog_id_fk
-        foreign key (post_id) references project.blog (id),
+    constraint comment_blog_post_id_fk
+        foreign key (post_id) references project.blog (post_id),
     constraint comment_registration_id_fk
         foreign key (actor_id) references project.registration (id)
 );
+
+
 
 create table project.reply
 (
