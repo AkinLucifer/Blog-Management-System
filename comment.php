@@ -80,7 +80,14 @@ if(!empty($connection)) {
     echo'<div class="card">';
     echo '<div class="card-body">';
     echo '<p class="text-start">';
-
+/*Check the comment details*/
+    $check_comment_query = "select *from project.comment where post_id=$id";
+    $check_comment =mysqli_query($connection,$check_comment_query);
+    $check_comment_record = mysqli_fetch_array($check_comment);
+    echo $check_comment_record['comment'];
+    while ($check_comment_record = mysqli_fetch_array($check_comment)){
+    echo $check_comment_record['comment'];
+    }
     echo '</div>';
     echo'</div>';
     ?>
