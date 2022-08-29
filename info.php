@@ -27,6 +27,7 @@ if(isset($_GET['infoid'])){
             <h2 class="text-center"><?php echo$id?>'s created Blog</h2>
     <div class="container-sm w-50">
             <?php
+
             echo $record_blog['post'];
             echo '<br>';
             while($record_blog =mysqli_fetch_array($search_blog)){

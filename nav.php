@@ -18,19 +18,12 @@ $user = $row['user_type'];
     <meta charset="UTF-8">
     <Title>BMS</Title>
     <link rel="stylesheet" href="./css/bootstrap.min.css">
-<style>
-    * {
-        margin:0;
-        padding:0;
-        box-sizing: border-box;
-    }
-    </style>
 </head>
 <body>
 <section>
-    <header >
+    <header>
         <nav class="navbar">
-            <ul class="nav nav-pills nav-fill" style="margin-left: 10px;">
+            <ul class="nav nav-pills nav-fill ms-3">
                 <li class="nav-item nav-justified">
                     <a class="nav-link active text-white" aria-current="page">BMS</a>
                 </li>
@@ -46,8 +39,7 @@ $user = $row['user_type'];
                 </li>
                 <li class="nav-item ">
                     <?php
-                    if($user=='admin')
-                    {
+                    if ($user == 'admin') {
                         echo '
                             <li class="nav-item">
                             <a href="admin_page.php" class="nav-link">Administrator</a>
@@ -55,9 +47,11 @@ $user = $row['user_type'];
                             <li class="nav-item">
                             <a href="reported_page.php" class="nav-link">Reports</a>
                             </li>';
-                    }
-                    else{
-                        echo '<a href="blogs.php" class="nav-link">Blogs</a>';
+                    } else {
+                        echo '<a href="user_blog.php" class="nav-link">Blogs</a>
+                        <li class="nav-item ">
+                    <a href="reported_page.php" class="nav-link ">Reported</a>
+                </li>';
                     }
                     ?>
                 </li>

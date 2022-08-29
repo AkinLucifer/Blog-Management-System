@@ -1,26 +1,27 @@
 <?php
+
 include 'database.php';
+if (!empty($connection)) {
+    if (isset($_POST['report'])) {
+        $username = $_POST['username'];
+        echo $username;
+        $id = $_POST['id'];
+        echo $id;
+        $reason = $_POST['reason'];
+        echo $reason;
+
+        /*Search user's details*/
+        $search_user_query = "select *from project.registration where username='$username'";
+        $search_user = mysqli_query($connection, $search_user_query);
+        $search_user_record = mysqli_fetch_array($search_user);
+        $user_id = $search_user_record['id'];
 
 
-if(isset($_POST['submit'])){
-if(!empty($connection)){
-
-    $reason = $_POST['reason'];
-    $id = $_POST['id'];
-    $username =$_POST['username'];
-
-
-
-        /*Check user's detail*/
-        $check_user_query = "select *from project.registration where username='$username'";
-        $check_user = mysqli_query($connection, $check_user_query);
-        $check_user_record = mysqli_fetch_array($check_user);
-        $user_id = $check_user_record['id'];
-
-        /*Insert into report table*/
         $report_query = "insert into project.report(post_id, report_users, report_users_id, reason)
-                            values($id,'$username',$user_id,'$reason') ";
-        $report = mysqli_query($connection,$report_query);
-
-}
+                            values($id,'$username',$user_id,'$reason')";
+        $report = mysqli_query($connection, $report_query);
+        if ($report) {
+            header('Location:homepage.php');
+        }
+    }
 }
